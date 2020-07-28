@@ -41,8 +41,8 @@ class Demo:
 
         a.close()  # close files, free memory
 
+    # Convert plaintext into features
     def feature_engineering(self):
-        # Convert plaintext into features
         # ML models need features, not just plaintext. The CountVectorizer converts the latter into the former
         vec = CountVectorizer(analyzer=self.analyzer, ngram_range=(1, int(self.ngram_upper_bound)))
         print("Fitting CV...")
@@ -50,6 +50,7 @@ class Demo:
         self.X_test = vec.transform(self.X_test)
         print("Fitting complete.")
 
+    # fit SVM model on data
     def train_model(self):
         # Shuffle data (keeps indices)
         self.X_train, self.y_train = shuffle(self.X_train, self.y_train)
@@ -62,8 +63,8 @@ class Demo:
         print("Training complete.")
         self.svm = svm
 
+    # predictions + print results
     def classification_report(self):
-        # Testing + results
         rand_acc = sklearn.metrics.balanced_accuracy_score(self.y_test, [random.randint(1, 2) for x in range(0, len(self.y_test))])
         print(f"Baseline Accuracy: {rand_acc:}\n")  # accuracy of random baseline
         print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n "
