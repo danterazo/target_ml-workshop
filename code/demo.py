@@ -48,6 +48,7 @@ class Demo:
         print("Fitting CV...")
         self.X_train = vec.fit_transform(self.X_train)
         self.X_test = vec.transform(self.X_test)
+        print("Fitting complete.")
 
     def train_model(self):
         # Shuffle data (keeps indices)
