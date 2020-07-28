@@ -14,7 +14,7 @@ class Demo:
         self.X_test = None
         self.y_train = None
         self.y_test = None
-        self.svm = None  # blank until model is trained
+        self.svm = None  # blank until model is trained in `train_model()`
         self.analyzer = "word"  # CountVectorizer. "word" OR "char"
         self.ngram_upper_bound = 3  # CountVectorizer. lower is generally better
         self.kernel = "linear"  # SVM. "linear" OR "poly" OR "rbf" OR "sigmoid"
@@ -66,13 +66,13 @@ class Demo:
         rand_acc = sklearn.metrics.balanced_accuracy_score(self.y_test, [random.randint(1, 2) for x in range(0, len(self.y_test))])
         print(f"Baseline Accuracy: {rand_acc:}\n")  # accuracy of random baseline
         print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n "
-              f"{sklearn.metrics.classification_report(self.y_test, svm.predict(self.X_test), digits=6)}")  # report
+              f"{sklearn.metrics.classification_report(self.y_test, self.svm.predict(self.X_test), digits=6)}")  # report
 
 
 if __name__ == "__main__":
     demo = Demo()  # initialize empty Demo object
-    demo.get_data()  # populate Demo object's instance attributes with data
 
+    demo.get_data()  # populate Demo object's instance attributes with data
     demo.feature_engineering()  # prepare data into something the SVM can utilize
     demo.train_model()  # train SVM on prepared data
     demo.classification_report()  # print scores to console
