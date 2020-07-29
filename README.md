@@ -19,7 +19,13 @@ If Python3 is installed on your system, run the following to install dependencie
 pip3 install -r requirements.txt
 ```
 
-Finally, to run the script:
+If you're using [Conda](https://docs.conda.io/en/latest/), run the following instead:
+```
+conda install --file requirements.txt
+```
+
+### Usage
+To run the script:
 ```
 python3 demo.py
 ```
