@@ -60,7 +60,7 @@ class Demo:
         print("Training SVM...")
         svm = SVC(kernel=self.kernel, gamma=self.gamma)
         svm.fit(self.X_train, self.y_train)
-        print("Training complete.")
+        print("Training complete.\n")
         self.svm = svm
 
     # predictions + print results
