@@ -1,11 +1,13 @@
 # Title:    Natural Language Processing Support Vector Machine Demo for Target BegINNER Con
 # Author:   Dante Razo, dante.razo@target.com
 # Modified: 2020-07-28
+import random
+import time
+
 from sklearn.svm import SVC
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.utils import shuffle
 import sklearn.metrics
-import random
 
 
 class Demo:
@@ -66,15 +68,19 @@ class Demo:
     # predictions + print results
     def classification_report(self):
         rand_acc = sklearn.metrics.balanced_accuracy_score(self.y_test, [random.randint(1, 2) for x in range(0, len(self.y_test))])
-        print(f"Baseline Accuracy: {rand_acc:}\n")  # accuracy of random baseline
+        print(f"Baseline Accuracy: {rand_acc:}")  # accuracy of random baseline
         print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n "
               f"{sklearn.metrics.classification_report(self.y_test, self.svm.predict(self.X_test), digits=6)}")  # report
 
 
 if __name__ == "__main__":
     demo = Demo()  # initialize empty Demo object
+    start_time = time.perf_counter()  # start timer
 
     demo.get_data()  # populate Demo object's instance attributes with data
     demo.feature_engineering()  # prepare data into something the SVM can utilize
     demo.train_model()  # train SVM on prepared data
     demo.classification_report()  # print scores to console
+    end_time = time.perf_counter()  # stop timer
+
+    print(f"\nTime: {end_time - start_time}s")
