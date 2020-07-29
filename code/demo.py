@@ -48,7 +48,7 @@ class Demo:
     def feature_engineering(self):
         # ML models need features, not just plaintext. The CountVectorizer converts the latter into the former
         vec = CountVectorizer(analyzer=self.analyzer, ngram_range=(1, int(self.ngram_upper_bound)))
-        print("Fitting CV...")
+        print("Fitting CountVectorizer...")
         self.X_train = vec.fit_transform(self.X_train)
         self.X_test = vec.transform(self.X_test)
         print("Fitting complete.")
@@ -72,11 +72,11 @@ class Demo:
         print(f"Baseline Accuracy: {rand_acc:}")  # accuracy of random baseline
         print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n "
               f"{sklearn.metrics.classification_report(self.y_test, self.svm.predict(self.X_test), digits=6)}")  # report
-        print(f"\nTime Elapsed: {time.perf_counter() - self.start_time}s")  # print time elapsed since script was run
+        print(f"Time Elapsed: {time.perf_counter() - self.start_time} seconds")  # print time elapsed since script was run
 
 
 if __name__ == "__main__":
-    demo = Demo()  # initialize empty Demo object
+    demo = Demo()  # initialize new Demo object
 
     demo.get_data()  # populate Demo object's instance attributes with data
     demo.feature_engineering()  # prepare data into something the SVM can utilize
