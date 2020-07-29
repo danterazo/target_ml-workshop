@@ -13,15 +13,15 @@ import sklearn.metrics
 class Demo:
     def __init__(self):
         self.X_train = None  # type None until initialized with `get_data()`
-        self.X_test = None
-        self.y_train = None
-        self.y_test = None
+        self.X_test = None  # type None until initialized with `get_data()`
+        self.y_train = None  # type None until initialized with `get_data()`
+        self.y_test = None  # type None until initialized with `get_data()`
         self.svm = None  # blank until model is trained in `train_model()`
         self.analyzer = "word"  # CountVectorizer. "word" OR "char"
         self.ngram_upper_bound = 3  # CountVectorizer. lower is generally better
         self.kernel = "linear"  # SVM. "linear" OR "poly" OR "rbf" OR "sigmoid"
         self.gamma = "auto"  # SVM. kernel coefficient for rbf, poly, sigmoid kernels
-        self.start_time = time.perf_counter()
+        self.start_time = time.perf_counter()  # start timer when object is initialized
 
     # Import data
     # Audience challenge: remove "http://t.co/*" links from data
