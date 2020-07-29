@@ -14,12 +14,12 @@ cd target_ml-workshop
 ```
 
 ### Python
-If Python3 is installed on your system, run the following to install dependencies
+If Python3 is installed on your system, run the following to install dependencies:
 ```
 pip3 install -r requirements.txt
 ```
 
-If you're using [Conda](https://docs.conda.io/en/latest/), run the following instead:
+If you're using [Conda](https://docs.conda.io/en/latest/), run this instead:
 ```
 conda install --file requirements.txt
 ```
