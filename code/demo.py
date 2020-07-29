@@ -1,6 +1,6 @@
 # Title:    Natural Language Processing Support Vector Machine Demo for Target BegINNER Con
 # Author:   Dante Razo, dante.razo@target.com
-# Modified: 2020-07-28
+# Modified: 2020-07-29
 import random
 import time
 
@@ -21,6 +21,7 @@ class Demo:
         self.ngram_upper_bound = 3  # CountVectorizer. lower is generally better
         self.kernel = "linear"  # SVM. "linear" OR "poly" OR "rbf" OR "sigmoid"
         self.gamma = "auto"  # SVM. kernel coefficient for rbf, poly, sigmoid kernels
+        self.start_time = time.perf_counter()
 
     # Import data
     # Audience challenge: remove "http://t.co/*" links from data
@@ -71,16 +72,13 @@ class Demo:
         print(f"Baseline Accuracy: {rand_acc:}")  # accuracy of random baseline
         print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n "
               f"{sklearn.metrics.classification_report(self.y_test, self.svm.predict(self.X_test), digits=6)}")  # report
+        print(f"\nTime Elapsed: {time.perf_counter() - self.start_time}s")  # print time elapsed since script was run
 
 
 if __name__ == "__main__":
     demo = Demo()  # initialize empty Demo object
-    start_time = time.perf_counter()  # start timer
 
     demo.get_data()  # populate Demo object's instance attributes with data
     demo.feature_engineering()  # prepare data into something the SVM can utilize
     demo.train_model()  # train SVM on prepared data
     demo.classification_report()  # print scores to console
-    end_time = time.perf_counter()  # stop timer
-
-    print(f"\nTime: {end_time - start_time}s")
