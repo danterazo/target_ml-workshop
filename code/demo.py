@@ -28,21 +28,21 @@ class Demo:
     def get_data(self):
         data_dir = "../data/"  # defined up top for easy refactoring
 
-        a = open(f"{data_dir}X_train", "r", encoding="utf-8")  # open plaintext file
-        self.X_train = a.read().splitlines()  # given file, read line-by-line into a list
+        opened_file = open(f"{data_dir}X_train", "r", encoding="utf-8")  # open plaintext file
+        self.X_train = opened_file.read().splitlines()  # given file, read line-by-line into a list
 
-        a = open(f"{data_dir}X_test", "r", encoding="utf-8")  # open plaintext file
-        self.X_test = a.read().splitlines()
+        opened_file = open(f"{data_dir}X_test", "r", encoding="utf-8")  # open plaintext file
+        self.X_test = opened_file.read().splitlines()
 
-        a = open(f"{data_dir}y_train", "r", encoding="utf-8")  # open plaintext file
-        y_train = a.read().splitlines()
+        opened_file = open(f"{data_dir}y_train", "r", encoding="utf-8")  # open plaintext file
+        y_train = opened_file.read().splitlines()
         self.y_train = [int(y) for y in y_train]  # typecast list members from str -> int using list comprehension
 
-        a = open(f"{data_dir}y_test", "r", encoding="utf-8")  # open plaintext file
-        y_test = a.read().splitlines()
+        opened_file = open(f"{data_dir}y_test", "r", encoding="utf-8")  # open plaintext file
+        y_test = opened_file.read().splitlines()
         self.y_test = [int(y) for y in y_test]
 
-        a.close()  # close files, free memory
+        opened_file.close()  # close files, free memory
 
     # Convert plaintext into features
     def feature_engineering(self):
