@@ -1,5 +1,6 @@
-# Dante Razo's ML Workshop for Target BegINNER Con 2020
-Presented on 08/06/2020
+# Machine Learning Workshop for Target BegINNER Con 2020
+#### By: Dante Razo, TTS CSIRT SU20 Intern
+Code and resources from Dante's machine learning workshop, presented at Target's 2020 BegINNER Con. 
 
 ## Setup
 ### Git
