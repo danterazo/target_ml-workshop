@@ -2,6 +2,9 @@
 #### By: Dante Razo, TTS CSIRT SU20 Intern
 Code, resources, and data from Dante's machine learning workshop. Presented at Target Corporation's 2020 BegINNER Con on August 8, 2020.
 
+## Proposal / Summary
+This workshop will serve as a crash courrse for those who want to learn more about one of the hottest fields in tech. The goal is to introduce basic machine learning, statistics, and natural language processing concepts. The workshop will end with a live sentiment analysis demo on Twitter-sourced data.
+
 ## Setup
 ### Git
 First, clone the repo:
