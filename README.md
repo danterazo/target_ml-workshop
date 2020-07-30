@@ -1,6 +1,6 @@
 # BegINNER Con Machine Learning Workshop
 #### By: Dante Razo, TTS CSIRT SU20 Intern
-Code, resources, and data from Dante's machine learning workshop. Presented at Target's 2020 BegINNER Con on August 8, 2020.
+Code, resources, and data from Dante's machine learning workshop. Presented at Target Corporation's 2020 BegINNER Con on August 8, 2020.
 
 ## Setup
 ### Git
