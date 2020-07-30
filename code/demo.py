@@ -13,9 +13,9 @@ import sklearn.metrics
 class Demo:
     def __init__(self):
         self.X_train = None  # type None until initialized with `get_data()`
-        self.X_test = None  # type None until initialized with `get_data()`
-        self.y_train = None  # type None until initialized with `get_data()`
-        self.y_test = None  # type None until initialized with `get_data()`
+        self.X_test = None
+        self.y_train = None
+        self.y_test = None
         self.svm = None  # blank until model is trained in `train_model()`
         self.analyzer = "word"  # CountVectorizer. "word" OR "char"
         self.ngram_upper_bound = 3  # CountVectorizer. lower is generally better
@@ -26,23 +26,30 @@ class Demo:
     # Import data
     # Audience challenge: remove "http://t.co/*" links from data
     def get_data(self):
-        data_dir = "../data/"  # defined up top for easy refactoring
+        opened_file = self.open_file("X_train")  # get File() object
+        self.X_train = opened_file.read().splitlines()  # given File(), read line-by-line into a list
 
-        opened_file = open(f"{data_dir}X_train", "r", encoding="utf-8")  # open plaintext file
-        self.X_train = opened_file.read().splitlines()  # given file, read line-by-line into a list
-
-        opened_file = open(f"{data_dir}X_test", "r", encoding="utf-8")  # open plaintext file
+        opened_file = self.open_file("X_test")
         self.X_test = opened_file.read().splitlines()
 
-        opened_file = open(f"{data_dir}y_train", "r", encoding="utf-8")  # open plaintext file
+        opened_file = self.open_file("y_train")
         y_train = opened_file.read().splitlines()
         self.y_train = [int(y) for y in y_train]  # typecast list members from str -> int using list comprehension
 
-        opened_file = open(f"{data_dir}y_test", "r", encoding="utf-8")  # open plaintext file
+        opened_file = self.open_file("y_test")
         y_test = opened_file.read().splitlines()
         self.y_test = [int(y) for y in y_test]
 
         opened_file.close()  # close files, free memory
+
+    # helper function. given a filename, return a File() object with appropriate params
+    @staticmethod
+    def open_file(filename):
+        data_dir = "../data/"  # params defined up top for easy refactoring
+        mode = "r"
+        encoding = "utf-8"
+
+        return open(f"{data_dir}{filename}", mode=mode, encoding=encoding)
 
     # Convert plaintext into features
     def feature_engineering(self):
