@@ -23,7 +23,7 @@ If Python3 is installed on your system, run the following to install dependencie
 ```
 
 #### Conda
-If you're using [Conda](https://docs.conda.io/en/latest/), you have two choices:
+If you're using [Conda](https://docs.conda.io/en/latest/), you can either create a new environment or use an existing one
 
 ##### 1. Create New Environment
 Create a new Conda environment like so: 
@@ -32,8 +32,15 @@ Create a new Conda environment like so:
 > conda activate ml-workshop
 ```
 
-##### 2. Use Base Environment
-Alternatively, you can install the required packages directly to Conda's base environment:
+##### 2. Use Existing Environment
+You can also install the required packages in an existing Conda environment:
+```
+> conda activate <conda_env_name>
+> conda install --file requirements.txt
+```
+
+##### 3. Use Base Environment
+Alternatively, you can install the required packages in Conda's base environment:
 ```
 > conda install --file requirements.txt
 ```
