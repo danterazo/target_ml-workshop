@@ -14,6 +14,8 @@ Then, navigate to the repo folder:
 ```
 
 ### Python
+You can use either vanilla Python or Conda.
+
 #### Vanilla
 If Python3 is installed on your system, run the following to install dependencies:
 ```
@@ -21,17 +23,17 @@ If Python3 is installed on your system, run the following to install dependencie
 ```
 
 #### Conda
-If you're using [Conda](https://docs.conda.io/en/latest/), consider one of the following options:
+If you're using [Conda](https://docs.conda.io/en/latest/), you have two choices:
 
-##### 1. New Environment
+##### 1. Create New Environment
 Create a new Conda environment like so: 
 ```
 > conda create --name ml-workshop --file requirements.txt --yes
 > conda activate ml-workshop
 ```
 
-##### 2. Base Environment
-Or, you can install the required packages to Conda's base environment:
+##### 2. Use Base Environment
+Alternatively, you can install the required packages directly to Conda's base environment:
 ```
 > conda install --file requirements.txt
 ```
