@@ -17,7 +17,7 @@ class Demo:
         self.y_test = None
         self.svm = None  # blank until model is trained in `train_model()`
         self.analyzer = "word"  # CountVectorizer. "word" OR "char"
-        self.ngram_upper_bound = 3  # CountVectorizer. lower is generally better
+        self.ngram_upper_bound = 3  # CountVectorizer. lower is better in this case
         self.kernel = "linear"  # SVM. "linear" OR "poly" OR "rbf" OR "sigmoid"
         self.gamma = "auto"  # SVM. kernel coefficient for rbf, poly, sigmoid kernels
         self.start_time = time.perf_counter()  # start timer when object is initialized
@@ -61,7 +61,7 @@ class Demo:
         print("Fitting CountVectorizer...")
         self.X_train = vec.fit_transform(self.X_train)
         self.X_test = vec.transform(self.X_test)
-        print("Fitting complete.")
+        print("Fitting complete.\n")
 
     # fit SVM model on data
     def train_model(self):
@@ -88,6 +88,7 @@ class Demo:
         print(f"Time Elapsed: {time_elapsed} seconds")  # print time elapsed since script was run
 
 
+# if run as a script, this code gets executed:
 if __name__ == "__main__":
     demo = Demo()  # initialize new Demo object
 

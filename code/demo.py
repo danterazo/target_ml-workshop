@@ -4,7 +4,7 @@ from sklearn.metrics import balanced_accuracy_score
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import SVC
 
-""" Import Data """
+""" Import data """
 file = open("../data/X_train.txt", mode="rt", encoding="utf-8") # go out one folder -> go into `data` folder -> open `X_train.txt`
 X_train = file.read().splitlines()  # if printed, would look like: [line1, line2, line3, ...]
 file = open("../data/X_test.txt", mode="rt", encoding="utf-8")
@@ -34,7 +34,7 @@ array_of_random_preds = [random.randint(1, 2) for x in range(0, len(y_test))]  #
 rand_accuracy = balanced_accuracy_score(y_test, array_of_random_preds)  # compare y_test with random array
 print(f"baseline accuracy: {rand_accuracy}")  # expected: ~0.50, i.e. 50%
 
-""" Get classification report / test SVM model """
+""" Get mode accuracy """
 predictions = svm.predict(X_test)  # given the lines we set aside for testing, the model will predict what it thinks its class should be
 # report = classification_report(y_test, predictions, digits=6)  # 6 digits to keep the printout nice and clean
 model_accuracy = balanced_accuracy_score(y_test, predictions)
