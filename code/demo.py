@@ -7,7 +7,7 @@ import time
 from sklearn.svm import SVC
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.utils import shuffle
-import sklearn.metrics
+from sklearn.metrics import balanced_accuracy_score, classification_report
 
 
 class Demo:
@@ -24,19 +24,25 @@ class Demo:
         self.start_time = time.perf_counter()  # start timer when object is initialized
 
     # Import data
-    # Audience challenge: remove "http://t.co/*" links from data
+    """ AUDIENCE CHALLENGE 
+    - Try removing "http://t.co/*" links from data.
+        - HINT: There are a few ways to do this
+        - HINT: The easiest involves 
+    """
+    # Audience challenge:
+    #
     def get_data(self):
-        opened_file = self.open_file("X_train")  # get File() object
+        opened_file = self.open_file("X_train.txt")  # get File() object using helper function (defined below)
         self.X_train = opened_file.read().splitlines()  # given File(), read line-by-line into a list
 
-        opened_file = self.open_file("X_test")
+        opened_file = self.open_file("X_test.txt")
         self.X_test = opened_file.read().splitlines()
 
-        opened_file = self.open_file("y_train")
+        opened_file = self.open_file("y_train.txt")
         y_train = opened_file.read().splitlines()
         self.y_train = [int(y) for y in y_train]  # typecast list members from str -> int using list comprehension
 
-        opened_file = self.open_file("y_test")
+        opened_file = self.open_file("y_test.txt")
         y_test = opened_file.read().splitlines()
         self.y_test = [int(y) for y in y_test]
 
@@ -45,9 +51,9 @@ class Demo:
     # helper function. given a filename, return a File() object with appropriate params
     @staticmethod  # this method is "static" because it is not affected by the object state
     def open_file(filename):
-        data_dir = "../data/"  # params defined up top for easy refactoring
-        mode = "r"
-        encoding = "utf-8"
+        data_dir = "../data/"  # "../data" tells the script to go up a folder ("../"), then look for the folder named "data/"
+        mode = "rt"  # read-only
+        encoding = "utf-8"  # open file using Unicode encoding
 
         return open(f"{data_dir}{filename}", mode=mode, encoding=encoding)
 
@@ -63,8 +69,8 @@ class Demo:
     # fit SVM model on data
     def train_model(self):
         # Shuffle data (keeps indices)
-        self.X_train, self.y_train = shuffle(self.X_train, self.y_train)
-        self.X_test, self.y_test = shuffle(self.X_test, self.y_test)
+        #self.X_train, self.y_train = shuffle(self.X_train, self.y_train)
+        #self.X_test, self.y_test = shuffle(self.X_test, self.y_test)
 
         # Fitting the model
         print("Training SVM...")
@@ -75,11 +81,18 @@ class Demo:
 
     # predictions + print results
     def classification_report(self):
-        rand_acc = sklearn.metrics.balanced_accuracy_score(self.y_test, [random.randint(1, 2) for x in range(0, len(self.y_test))])
-        print(f"Baseline Accuracy: {rand_acc:}")  # accuracy of random baseline
-        print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n "
-              f"{sklearn.metrics.classification_report(self.y_test, self.svm.predict(self.X_test), digits=6)}")  # report
-        print(f"Time Elapsed: {time.perf_counter() - self.start_time} seconds")  # print time elapsed since script was run
+        rand_pred = [random.randint(1, 2) for x in range(0, len(self.y_test))]
+        rand_acc = balanced_accuracy_score(self.y_test, rand_pred)  # get accuracy of random baseline
+        print(f"Baseline Accuracy: {rand_acc:}")  # print the baseline accuracy (expected: ~50%)
+
+        predictions = self.svm.predict(self.X_test)
+
+        # the next line is just a fancy header for the classification report:
+        print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n")
+        print(f"{classification_report(self.y_test, predictions, digits=6)}")  # print the classification report
+
+        time_elapsed = time.perf_counter() - self.start_time
+        print(f"Time Elapsed: {time_elapsed} seconds")  # print time elapsed since script was run
 
 
 if __name__ == "__main__":
