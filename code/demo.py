@@ -29,8 +29,6 @@ class Demo:
         - HINT: There are a few ways to do this
         - HINT: The easiest involves 
     """
-    # Audience challenge:
-    #
     def get_data(self):
         opened_file = self.open_file("X_train.txt")  # get File() object using helper function (defined below)
         self.X_train = opened_file.read().splitlines()  # given File(), read line-by-line into a list
