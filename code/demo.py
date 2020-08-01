@@ -36,6 +36,5 @@ print(f"baseline accuracy: {rand_accuracy}")  # expected: ~0.50, i.e. 50%
 
 """ Get mode accuracy """
 predictions = svm.predict(X_test)  # given the lines we set aside for testing, the model will predict what it thinks its class should be
-# report = classification_report(y_test, predictions, digits=6)  # 6 digits to keep the printout nice and clean
 model_accuracy = balanced_accuracy_score(y_test, predictions)
 print(f"model accuracy: {model_accuracy}")  # print report; expected: ~0.81, i.e. 81% accuracy
