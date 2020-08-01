@@ -12,8 +12,8 @@ This workshop will serve as a crash course for those who want to learn about one
 | **code/** | Contains all scripts |
 | **data/** | Contains Waseem's datasets |
 | **paper/** | Contains Waseem paper (source of data) |
-| *demo_extended.py* | Object-oriented version of the demo. Makes tinkering easier |
-| *demo_simple.py* | Simple version of script. Based on live demo |
+| *demo.py* | Script as seen in the live demo |
+| *demo_extended.py* | Object-oriented version of the demo script. Same output but easier to tinker with parameters and settings. |
 
 
 
