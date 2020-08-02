@@ -1,12 +1,12 @@
 # Title:    Natural Language Processing Support Vector Machine Demo for Target BegINNER Con
 # Author:   Dante Razo, dante.razo@target.com
 # Modified: 2020-07-29
-import random
 import time
 
 from sklearn.svm import SVC
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics import balanced_accuracy_score, classification_report
+import numpy as np
 
 
 class Demo:
@@ -65,7 +65,6 @@ class Demo:
 
     # fit SVM model on data
     def train_model(self):
-        # Fitting the model
         print("Training SVM...")
         svm = SVC(kernel=self.kernel, gamma=self.gamma)
         svm.fit(self.X_train, self.y_train)
@@ -74,11 +73,14 @@ class Demo:
 
     # predictions + print results
     def classification_report(self):
-        rand_pred = [random.randint(1, 2) for x in range(0, len(self.y_test))]
+        ytest_size = len(self.y_test)
+        rand_pred = np.random.randint(1, 3, ytest_size)  # lower bound: 1; upper:3 (exclusive, so actually 2); size: size_of_ytest
         rand_acc = balanced_accuracy_score(self.y_test, rand_pred)  # get accuracy of random baseline
         print(f"Baseline Accuracy: {rand_acc:}")  # print the baseline accuracy (expected: ~50%)
 
-        predictions = self.svm.predict(self.X_test)
+        predictions = self.svm.predict(self.X_test)  # get predictions
+        model_accuracy = balanced_accuracy_score(self.y_test, predictions)
+        print(f"Model Accuracy: {model_accuracy}")
 
         # the next line is just a fancy header for the classification report:
         print(f"Classification Report [{self.kernel} kernel, {self.analyzer} analyzer, ngram_range(1,{self.ngram_upper_bound})]:\n")

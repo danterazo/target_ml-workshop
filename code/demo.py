@@ -1,8 +1,7 @@
-import random
-
 from sklearn.metrics import balanced_accuracy_score
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import SVC
+import numpy as np
 
 """ Import data """
 file = open("../data/X_train.txt", mode="rt", encoding="utf-8") # go out one folder -> go into `data` folder -> open `X_train.txt`
@@ -29,10 +28,11 @@ X_test = vec.transform(X_test)  # transform `X_text`; no need to fit the CountVe
 svm = SVC(kernel="linear")  # initalize SVM model. feel free to experiment with kernels!
 svm.fit(X_train, y_train)  # fit SVM model to training data
 
-""" Get random accuracy (baseline) """
-array_of_random_preds = [random.randint(1, 2) for x in range(0, len(y_test))]  # create random array of 1's and 2's (same sz as `y_test`)
-rand_accuracy = balanced_accuracy_score(y_test, array_of_random_preds)  # compare y_test with random array
-print(f"baseline accuracy: {rand_accuracy}")  # expected: ~0.50, i.e. 50%
+""" Get baseline accuracy (random) """
+ytest_size = len(y_test)  # size of `y_test`
+array_of_random_preds = np.random.randint(1, 3, ytest_size)  # create an random array of 1's and 2's. length is the same as `y_test`
+baseline_accuracy = balanced_accuracy_score(y_test, array_of_random_preds)  # compare y_test with random array
+print(f"baseline accuracy: {baseline_accuracy}")  # expected: ~0.50, i.e. 50%
 
 """ Get mode accuracy """
 predictions = svm.predict(X_test)  # given the lines we set aside for testing, the model will predict what it thinks its class should be
