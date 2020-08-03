@@ -34,7 +34,7 @@ array_of_random_preds = np.random.randint(1, 3, ytest_size)  # create an random 
 baseline_accuracy = balanced_accuracy_score(y_test, array_of_random_preds)  # compare y_test with random array
 print(f"baseline accuracy: {baseline_accuracy}")  # expected: ~0.50, i.e. 50%
 
-""" Get mode accuracy """
+""" Get model accuracy """
 predictions = svm.predict(X_test)  # given the lines we set aside for testing, the model will predict what it thinks its class should be
 model_accuracy = balanced_accuracy_score(y_test, predictions)
 print(f"model accuracy: {model_accuracy}")  # print report; expected: ~0.81, i.e. 81% accuracy
