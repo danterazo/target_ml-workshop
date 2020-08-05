@@ -25,8 +25,8 @@ X_train = vec.fit_transform(X_train)  # fit CountVectorizer to AND transform `X_
 X_test = vec.transform(X_test)  # transform `X_text`; no need to fit the CountVectorizer again
 
 """ Initialize and fit SVM model """
-svm = SVC(kernel="linear")  # initalize SVM model. feel free to experiment with kernels!
-svm.fit(X_train, y_train)  # fit SVM model to training data
+my_svm = SVC(kernel="linear")  # initalize SVM model. feel free to experiment with kernels!
+my_svm.fit(X_train, y_train)  # fit SVM model to training data
 
 """ Get baseline accuracy (random) """
 ytest_size = len(y_test)  # size of `y_test`
@@ -35,6 +35,6 @@ baseline_accuracy = balanced_accuracy_score(y_test, array_of_random_preds)  # co
 print(f"baseline accuracy: {baseline_accuracy}")  # expected: ~0.50, i.e. 50%
 
 """ Get model accuracy """
-predictions = svm.predict(X_test)  # given the lines we set aside for testing, the model will predict what it thinks its class should be
+predictions = my_svm.predict(X_test)  # given the lines we set aside for testing, the model will predict what it thinks its class should be
 model_accuracy = balanced_accuracy_score(y_test, predictions)
 print(f"model accuracy: {model_accuracy}")  # print report; expected: ~0.81, i.e. 81% accuracy

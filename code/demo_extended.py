@@ -15,7 +15,7 @@ class Demo:
         self.X_test = None
         self.y_train = None
         self.y_test = None
-        self.svm = None  # blank until model is trained in `train_model()`
+        self.my_svm = None  # blank until model is trained in `train_model()`
         self.analyzer = "word"  # CountVectorizer. "word" OR "char"
         self.ngram_upper_bound = 3  # CountVectorizer. lower is better in this case
         self.kernel = "linear"  # SVM. "linear" OR "poly" OR "rbf" OR "sigmoid"
@@ -69,7 +69,7 @@ class Demo:
         svm = SVC(kernel=self.kernel, gamma=self.gamma)
         svm.fit(self.X_train, self.y_train)
         print("Training complete.\n")
-        self.svm = svm
+        self.my_svm = svm
 
     # predictions + print results
     def classification_report(self):
@@ -78,7 +78,7 @@ class Demo:
         rand_acc = balanced_accuracy_score(self.y_test, rand_pred)  # get accuracy of random baseline
         print(f"Baseline Accuracy: {rand_acc:}")  # print the baseline accuracy (expected: ~50%)
 
-        predictions = self.svm.predict(self.X_test)  # get predictions
+        predictions = self.my_svm.predict(self.X_test)  # get predictions
         model_accuracy = balanced_accuracy_score(self.y_test, predictions)
         print(f"Model Accuracy: {model_accuracy}")
 
